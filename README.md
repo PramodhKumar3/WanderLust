@@ -299,4 +299,4 @@ This project is licensed under the MIT License.
 
 Project Link: [https://github.com/Pramodh9653/WanderLust](https://github.com/Pramodh9653/WanderLust)
 
-[Back to top](#WanderLust)
+[Back to top](#wanderlust-)

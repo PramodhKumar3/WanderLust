@@ -246,7 +246,12 @@ Then open a Pull Request.
 
 ## 🖼️ Screenshots
 
+### Wanderlust Swagger UI
+
 ![Wanderlust Swagger UI](images/SwaggerUI.png)
+
+### Wanderlust Home Page
+
 ![Wanderlust Home Page](images/HomePage.png)
 
 ---

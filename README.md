@@ -305,7 +305,7 @@ We welcome contributions to this project! Since this repository is **private**, 
 3. **Clone** your fork locally:
    ```bash
    git clone https://github.com/PramodhKumar3/WanderLust.git
-   cd Event-Ease
+   cd WanderLust
    ```
 4. **Create** a new feature branch:
    ```bash

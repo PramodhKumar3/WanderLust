@@ -246,8 +246,8 @@ Then open a Pull Request.
 
 ## 🖼️ Screenshots
 
-![Wanderlust Home Page](<Screenshot%20(185).png>)
-![Wanderlust Logged In](<Screenshot%20(186).png>)
+![Wanderlust Swagger UI](images/SwaggerUI.png)
+![Wanderlust Home Page](images/HomePage.png)
 
 ---
 

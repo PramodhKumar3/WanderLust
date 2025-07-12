@@ -1,20 +1,18 @@
 # WanderLust 🧭
 
-    Full Stack Java Peoject Using SpringBoot
-
 ## 📑 Table of Contents
 
 1. [Introduction](#introduction)
 2. [Technologies Used](#technologies-used)
-3. [Project Setup](#project-setup)
+3. [Screenshots](#screenshots)
+4. [Project Setup](#project-setup)
    - [Backend - Spring Boot](#backend---spring-boot)
    - [Frontend - Angular](#frontend---angular)
    - [Database - MySQL Setup](#database---mysql-setup)
-4. [Running the Application](#running-the-application)
-5. [Running JUnit Tests in Spring Tool Suite](#running-junit-tests-in-spring-tool-suite)
-6. [Log4j2 Setup](#log4j2-setup)
-7. [Contributing](#contributing)
-8. [Screenshots](#screenshots)
+5. [Running the Application](#running-the-application)
+6. [Running JUnit Tests in Spring Tool Suite](#running-junit-tests-in-spring-tool-suite)
+7. [Log4j2 Setup](#log4j2-setup)
+8. [Contributing](#contributing)
 9. [Author](#author)
 
 ---
@@ -38,6 +36,13 @@ The aim of WanderLust is to assist users in choosing, customizing, and booking t
 - **Swagger (Springdoc OpenAPI)**
 - **Maven**
 - **STS (Spring Tool Suite)**
+
+---
+
+## 🖼️ Screenshots
+
+![Wanderlust Home Page](<Screenshot%20(185).png>)
+![Wanderlust Logged In](<Screenshot%20(186).png>)
 
 ---
 
@@ -192,17 +197,36 @@ The aim of WanderLust is to assist users in choosing, customizing, and booking t
 
 ### 🗃️ Database - MySQL Setup
 
-```sql
-CREATE DATABASE wanderlust;
-```
+1. Install and start MySQL Server on your machine. You can use tools like XAMPP, WAMP, or MySQL Workbench.
 
-To import the `tablescripts.sql`:
+2. Create the database in MySQL using terminal or a GUI:
 
-```bash
-mysql -u root -p wanderlust < path/to/tablescripts.sql
-```
+   ```sql
+   CREATE DATABASE wanderlust;
+   ```
 
-Or open and execute manually via MySQL Workbench or CLI.
+3. Open `tablescripts.sql` file available in the project.
+
+4. Run all the SQL commands in `tablescripts.sql` in your MySQL database to create the necessary tables and insert seed data:
+
+   - Using MySQL CLI:
+     ```bash
+     mysql -u root -p wanderlust < path/to/tablescripts.sql
+     ```
+   - Or paste and execute inside MySQL Workbench.
+
+5. Alternatively, if you're unable to run `.sql` file through CLI, you can:
+   - Open your terminal or command prompt.
+   - Log in to MySQL:
+     ```bash
+     mysql -u root -p
+     ```
+   - Use the database:
+     ```sql
+     USE wanderlust;
+     ```
+   - Open the `tablescripts.sql` file in any editor, **copy the SQL commands**, and paste them **directly into the MySQL prompt** or **Workbench query window**.
+   - Press `Enter` or click **Execute** to run and populate the data manually.
 
 ---
 
@@ -217,42 +241,81 @@ Access Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080
 
 ## 🧪 Running JUnit Tests
 
-```bash
-mvn test
-```
-
-Or via STS → `Run As → JUnit Test`.
+1. Navigate to the `src/test/java` directory in STS.
+2. Right-click on the test class or package.
+3. Click `Run As` → `JUnit Test`.
+4. You can also run tests using Maven:
+   ```bash
+   mvn test
+   ```
 
 ---
 
 ## 📋 Log4j2 Setup
 
-Add `log4j2.xml` under `src/main/resources`. Example provided in this repo.
+To enable logging using Log4j2:
+
+### 🔽 Download Required JARs
+
+- Download Log4j2 jars from the official website:  
+  [https://logging.apache.org/log4j/2.x/download.html](https://logging.apache.org/log4j/2.x/download.html)
+
+Alternatively, these will be handled by the following dependency:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-log4j2</artifactId>
+</dependency>
+```
+
+### 📁 Add `log4j2.xml` or `log4j2.properties` in `src/main/resources`
+
+Example `log4j2.xml`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
+```
 
 ---
 
 ## 🤝 Contributing
 
-```bash
-git checkout -b feature-branch
-# make changes
-git commit -m 'Add feature'
-git push origin feature-branch
-```
+We welcome contributions to this project! Since this repository is **private**, please follow the steps below:
 
-Then open a Pull Request.
-
----
-
-## 🖼️ Screenshots
-
-### Wanderlust Swagger UI
-
-![Wanderlust Swagger UI](images/SwaggerUI.png)
-
-### Wanderlust Home Page
-
-![Wanderlust Home Page](images/HomePage.png)
+1. **Request access** to the repository by contacting the maintainer ([@Pramodh9653](https://github.com/Pramodh9653)) or by opening an issue if you see the Issues tab.
+2. Once access is granted, **fork** the repository to your own GitHub account.
+3. **Clone** your fork locally:
+   ```bash
+   git clone https://github.com/your-username/Event-Ease.git
+   cd Event-Ease
+   ```
+4. **Create** a new feature branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+5. **Make** your changes locally.
+6. **Commit** the changes:
+   ```bash
+   git commit -m "Add: your feature summary"
+   ```
+7. **Push** the branch to your fork:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+8. Open a **Pull Request** from your fork to the main repository.
 
 ---
 
@@ -299,9 +362,3 @@ This project is licensed under the MIT License.
 *.iml
 .vscode/
 ```
-
----
-
-Project Link: [https://github.com/Pramodh9653/WanderLust](https://github.com/Pramodh9653/WanderLust)
-
-[Back to top](#wanderlust-)

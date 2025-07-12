@@ -300,16 +300,16 @@ Example `log4j2.xml`:
 
 We welcome contributions to this project! Since this repository is **private**, please follow the steps below:
 
-1. **Request access** to the repository by contacting the maintainer ([@Pramodh9653](https://github.com/Pramodh9653)) or by opening an issue if you see the Issues tab.
+1. **Request access** to the repository by contacting the maintainer ([@PramodhKumar3](https://github.com/PramodhKumar3)) or by opening an issue if you see the Issues tab.
 2. Once access is granted, **fork** the repository to your own GitHub account.
 3. **Clone** your fork locally:
    ```bash
-   git clone https://github.com/your-username/Event-Ease.git
+   git clone https://github.com/PramodhKumar3/WanderLust.git
    cd Event-Ease
    ```
 4. **Create** a new feature branch:
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b feature/wanderlust
    ```
 5. **Make** your changes locally.
 6. **Commit** the changes:
@@ -318,7 +318,7 @@ We welcome contributions to this project! Since this repository is **private**, 
    ```
 7. **Push** the branch to your fork:
    ```bash
-   git push origin feature/your-feature-name
+   git push origin feature/wanderlust
    ```
 8. Open a **Pull Request** from your fork to the main repository.
 
@@ -367,3 +367,11 @@ This project is licensed under the MIT License.
 *.iml
 .vscode/
 ```
+
+---
+
+## 🔗 Project Link
+
+GitHub Repository: [https://github.com/PramodhKumar3/WanderLust](https://github.com/PramodhKumar3/WanderLust)
+
+[🔼 Back to top](#wanderlust-)

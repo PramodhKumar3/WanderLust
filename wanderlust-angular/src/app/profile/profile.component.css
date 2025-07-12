@@ -1,0 +1,60 @@
+
+
+.profile-container {
+  padding-top: 100px;
+  min-height: 100vh;
+  /* background-color: #f8f9fa; */
+  background-image: linear-gradient(to right, #cc2b5e, #753a88);
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
+  padding: 1.2rem;
+}
+
+.profile-info .row {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-info .row:last-child {
+  border-bottom: none;
+}
+
+.form-control:focus {
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 0.25rem rgba(30, 136, 229, 0.25);
+}
+
+.profile-section, .password-section {
+  padding: 1rem 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+}
+
+.text-primary {
+  color: #1976d2 !important;
+}
+
+.profile-btn {
+  background-color: #1976d2;
+  color: white;
+}
+
+.profile-btn:hover {
+  background-color: #0d47a1;
+  color: white;
+}

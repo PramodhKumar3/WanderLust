@@ -1,0 +1,343 @@
+.bookings-container {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 2rem 1rem;
+  font-family: var(--font-family, 'Roboto', sans-serif);
+}
+
+.bookings-header {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.bookings-title {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #2c3e50;
+  border-bottom: 2px solid #e8eaed;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #6c757d;
+}
+
+
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.booking-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.booking-card-header {
+  background: #17a2b8;
+  color: white;
+  padding: 1rem 1.5rem;
+  font-weight: 500;
+}
+
+.booking-id {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.booking-id i {
+  margin-right: 8px;
+}
+
+.booking-card-body {
+  padding: 1.5rem;
+}
+
+.booking-details {
+  margin-bottom: 1.5rem;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.detail-row label {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.destination-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.cost {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #28a745;
+}
+
+.booking-actions {
+  border-top: 1px solid #e9ecef;
+  padding-top: 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-button {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background-color: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-button:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.cancel-button i {
+  margin-right: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6c757d;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+:host ::ng-deep .p-dialog {
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 1.5rem;
+  border-radius: 0 0 4px 4px;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 1.5rem;
+  border-radius: 4px 4px 0 0;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  border-radius: 0 0 4px 4px;
+}
+
+.cancellation-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.warning-icon {
+  font-size: 2.5rem;
+  color: #ffc107;
+  margin-bottom: 1rem;
+}
+
+.warning-title {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #495057;
+}
+
+.trip-details {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.trip-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.refund {
+  border-top: 1px dashed #dee2e6;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+}
+
+.refund strong {
+  color: #28a745;
+  font-size: 1.2rem;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.btn-secondary i,
+.btn-danger i {
+  margin-right: 8px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+@media (min-width: 768px) {
+  .detail-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .detail-row label {
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+}
+
+:host ::ng-deep .p-dialog {
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+  background-color: #ffffff !important; 
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+  background-color: #ffffff !important; 
+  color: #333333;
+  padding: 1.5rem;
+  border-radius: 0 0 4px 4px;
+  opacity: 1 !important;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  background-color: #ffffff !important;
+  color: #333333;
+  padding: 1.5rem;
+  border-radius: 4px 4px 0 0;
+  opacity: 1 !important;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  background-color: #ffffff !important; 
+  padding: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  border-radius: 0 0 4px 4px;
+  opacity: 1 !important; 
+}
+
+
+:host ::ng-deep .p-toast .p-toast-message {
+  border-radius: 4px;
+  margin: 0 0 1rem 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  opacity: 1 !important; 
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border-width: 0 0 0 6px !important;
+}
+
+
+:host ::ng-deep .p-toast .p-toast-message.p-toast-message-success {
+  background-color: #EDF7ED !important; 
+  color: #1E4620 !important; 
+  border-left-color: #4CAF50 !important;
+}
+
+:host ::ng-deep .p-toast .p-toast-message.p-toast-message-error {
+  background-color: #FDEDED !important; 
+  color: #5F2120 !important;
+  border-left-color: #EF5350 !important; 
+}
+
+
+:host ::ng-deep .p-toast .p-toast-message.p-toast-message-warn {
+  background-color: #FFF8E1 !important;
+  color: #663C00 !important; 
+  border-left-color: #FF9800 !important; 
+}
+
+
+:host ::ng-deep .p-toast .p-toast-message.p-toast-message-info {
+  background-color: #E3F2FD !important; 
+  color: #0D3C61 !important; 
+  border-left-color: #2196F3 !important;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-icon-close {
+  color: #6C757D !important;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-message-icon {
+  font-size: 1.5rem; 
+}

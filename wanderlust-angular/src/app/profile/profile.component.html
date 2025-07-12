@@ -1,0 +1,209 @@
+<div class="profile-container">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">
+              <i class="bi bi-person-circle me-2"></i>User Profile
+            </h2>
+          </div>
+          
+          <!-- Profile Information Section -->
+          <div class="card-body">
+            <!-- Success/Error Messages -->
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ successMessage }}
+              <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ errorMessage }}
+              <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+            </div>
+
+            <div class="profile-section">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="text-primary">
+                  <i class="bi bi-info-circle me-2"></i>Personal Information
+                </h4>
+                <button *ngIf="!editMode" class="btn btn-outline-primary" (click)="toggleEditMode()">
+                  <i class="bi bi-pencil-square me-1"></i> Edit
+                </button>
+              </div>
+
+              <!-- View Mode -->
+              <div *ngIf="!editMode" class="profile-info">
+                <div class="mb-3 row">
+                  <div class="col-sm-4 fw-bold">Name:</div>
+                  <div class="col-sm-8">{{ user.userName }}</div>
+                </div>
+                <div class="mb-3 row">
+                  <div class="col-sm-4 fw-bold">Email:</div>
+                  <div class="col-sm-8">{{ user.emailId }}</div>
+                </div>
+                <div class="mb-3 row">
+                  <div class="col-sm-4 fw-bold">Contact Number:</div>
+                  <div class="col-sm-8">{{ user.contactNumber }}</div>
+                </div>
+              </div>
+
+              <!-- Edit Mode -->
+              <form *ngIf="editMode" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+                <div class="mb-3">
+                  <label for="userName" class="form-label">Name</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="userName" 
+                    formControlName="userName"
+                    [ngClass]="{'is-invalid': profileForm.get('userName')?.invalid && profileForm.get('userName')?.touched}"
+                  >
+                  <div *ngIf="profileForm.get('userName')?.invalid && profileForm.get('userName')?.touched" class="invalid-feedback">
+                    <div *ngIf="profileForm.get('userName')?.errors?.['required']">Name is required.</div>
+                    <div *ngIf="profileForm.get('userName')?.errors?.['pattern']">
+                      Name must contain only alphabets and spaces, and cannot start or end with a space.
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="emailId" class="form-label">Email</label>
+                  <input 
+                    type="email" 
+                    class="form-control" 
+                    id="emailId" 
+                    formControlName="emailId"
+                    [ngClass]="{'is-invalid': profileForm.get('emailId')?.invalid && profileForm.get('emailId')?.touched}"
+                  >
+                  <div *ngIf="profileForm.get('emailId')?.invalid && profileForm.get('emailId')?.touched" class="invalid-feedback">
+                    <div *ngIf="profileForm.get('emailId')?.errors?.['required']">Email is required.</div>
+                    <div *ngIf="profileForm.get('emailId')?.errors?.['pattern']">
+                      Please enter a valid email address (e.g., example@exm.com).
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="contactNumber" class="form-label">Contact Number</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="contactNumber" 
+                    formControlName="contactNumber"
+                    [ngClass]="{'is-invalid': profileForm.get('contactNumber')?.invalid && profileForm.get('contactNumber')?.touched}"
+                  >
+                  <div *ngIf="profileForm.get('contactNumber')?.invalid && profileForm.get('contactNumber')?.touched" class="invalid-feedback">
+                    <div *ngIf="profileForm.get('contactNumber')?.errors?.['required']">Contact number is required.</div>
+                    <div *ngIf="profileForm.get('contactNumber')?.errors?.['pattern']">
+                      Contact number must be a 10-digit Indian mobile number.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                  <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">
+                    <i class="bi bi-save me-1"></i> Save Changes
+                  </button>
+                  <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+                    <i class="bi bi-x-circle me-1"></i> Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Password Change Section -->
+            <hr class="my-4">
+            <div class="password-section">
+              <h4 class="text-primary mb-4">
+                <i class="bi bi-shield-lock me-2"></i>Change Password
+              </h4>
+
+              <!-- Success/Error Messages for Password -->
+              <div *ngIf="passwordSuccessMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ passwordSuccessMessage }}
+                <button type="button" class="btn-close" (click)="passwordSuccessMessage = ''"></button>
+              </div>
+              <div *ngIf="passwordErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ passwordErrorMessage }}
+                <button type="button" class="btn-close" (click)="passwordErrorMessage = ''"></button>
+              </div>
+
+              <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+                <div class="mb-3">
+                  <label for="currentPassword" class="form-label">Current Password</label>
+                  <div class="input-group">
+                    <input 
+                      [type]="showPassword ? 'text' : 'password'" 
+                      class="form-control" 
+                      id="currentPassword" 
+                      formControlName="currentPassword"
+                      [ngClass]="{'is-invalid': passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched}"
+                    >
+                    <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility('current')">
+                      <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                    </button>
+                    <div *ngIf="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched" class="invalid-feedback">
+                      Current password is required.
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="newPassword" class="form-label">New Password</label>
+                  <div class="input-group">
+                    <input 
+                      [type]="showNewPassword ? 'text' : 'password'" 
+                      class="form-control" 
+                      id="newPassword" 
+                      formControlName="newPassword"
+                      [ngClass]="{'is-invalid': passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched}"
+                    >
+                    <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility('new')">
+                      <i class="bi" [ngClass]="showNewPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                    </button>
+                    <div *ngIf="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched" class="invalid-feedback">
+                      <div *ngIf="passwordForm.get('newPassword')?.errors?.['required']">New password is required.</div>
+                      <div *ngIf="passwordForm.get('newPassword')?.errors?.['minlength'] || passwordForm.get('newPassword')?.errors?.['maxlength']">
+                        Password must be 7-20 characters long.
+                      </div>
+                      <div *ngIf="passwordForm.get('newPassword')?.errors?.['pattern']">
+                        Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*-).
+                      </div>
+                    </div>
+                  </div>
+                  <small class="text-muted">
+                    Password must be 7-20 characters with at least one uppercase, lowercase, digit, and special character (!@#$%^&*-).
+                  </small>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <div class="input-group">
+                    <input 
+                      [type]="showConfirmPassword ? 'text' : 'password'" 
+                      class="form-control" 
+                      id="confirmPassword" 
+                      formControlName="confirmPassword"
+                      [ngClass]="{'is-invalid': (passwordForm.get('confirmPassword')?.invalid || passwordForm.hasError('mismatch')) && passwordForm.get('confirmPassword')?.touched}"
+                    >
+                    <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility('confirm')">
+                      <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                    </button>
+                    <div *ngIf="(passwordForm.get('confirmPassword')?.invalid || passwordForm.hasError('mismatch')) && passwordForm.get('confirmPassword')?.touched" class="invalid-feedback">
+                      <div *ngIf="passwordForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</div>
+                      <div *ngIf="passwordForm.hasError('mismatch')">Passwords do not match.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="passwordForm.invalid">
+                  <i class="bi bi-key me-1"></i> Change Password
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,252 @@
+<section class="booking-page" id="bookingPage" *ngIf="dealId != null">
+  <div *ngIf="!destination" class="loading-container">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <p>Loading your adventure details...</p>
+  </div>
+
+  <div class="container" *ngIf="destination">
+    <div class="destination-header" [style.background-image]="'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url(' + destination.imageUrl + ')'">
+      <div class="header-content">
+        <h1>{{ destination.destinationName }}</h1>
+        <p>{{ destination.noOfNights }} Nights | {{ destination.continent }}</p>
+        <div class="badges">
+          <span class="badge" *ngIf="destination.discount > 0">
+            <i class="bi bi-tag-fill"></i> {{ destination.discount }}% OFF
+          </span>
+          <span class="badge rating-badge">
+            <i class="bi bi-star-fill"></i> 4.5
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-content">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="trip-details-card">
+            <h2>Trip Details</h2>
+            <ul class="nav nav-pills mb-4" id="tripDetailsTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="pill" data-bs-target="#overview" 
+                        type="button" role="tab" aria-selected="true">Overview</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="inclusions-tab" data-bs-toggle="pill" data-bs-target="#inclusions" 
+                        type="button" role="tab" aria-selected="false">What's Included</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="itinerary-tab" data-bs-toggle="pill" data-bs-target="#itinerary" 
+                        type="button" role="tab" aria-selected="false">Daily Itinerary</button>
+              </li>
+            </ul>
+
+            <div class="tab-content" id="tripDetailsContent">
+              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                <p class="description">{{ destination.details.about }}</p>
+                <div class="highlights">
+                  <h4>Trip Highlights</h4>
+                  <div class="highlight-grid">
+                    <div class="highlight-item">
+                      <i class="bi bi-calendar-event"></i>
+                      <span>{{ destination.noOfNights }} Nights</span>
+                    </div>
+                    <div class="highlight-item">
+                      <i class="bi bi-globe-americas"></i>
+                      <span>{{ destination.continent }}</span>
+                    </div>
+                    <div class="highlight-item">
+                      <i class="bi bi-person-plus"></i>
+                      <span>Up to 5 travelers</span>
+                    </div>
+                    <div class="highlight-item">
+                      <i class="bi bi-star"></i>
+                      <span>4.5 Rating</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane fade" id="inclusions" role="tabpanel" aria-labelledby="inclusions-tab">
+                <div class="inclusions-list">
+                  <ul>
+                    <li *ngFor="let inclusion of inclusions">
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>{{ inclusion }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="tab-pane fade" id="itinerary" role="tabpanel" aria-labelledby="itinerary-tab">
+                <div class="itinerary-timeline">
+                  <div class="timeline-item">
+                    <div class="day-marker">Day 1</div>
+                    <div class="timeline-content">
+                      <p>{{ destination.details.itinerary.firstDay }}</p>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-item" *ngFor="let highlight of highlights; let i = index">
+                    <div class="day-marker">Day {{ i + 2 }}</div>
+                    <div class="timeline-content">
+                      <p>{{ highlight }}</p>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-item">
+                    <div class="day-marker">Day {{ highlights.length + 2 }}</div>
+                    <div class="timeline-content">
+                      <p>{{ destination.details.itinerary.lastDay }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="booking-form-card">
+            <h2>Book Your Adventure</h2>
+            <div class="price-tag">
+              <span class="from">From</span>
+              <span class="price">{{ costPerPerson | currency:'USD' }}</span>
+              <span class="per-person">per person</span>
+            </div>
+            
+            <form [formGroup]="bookForm" (ngSubmit)="bookDestination()">
+              <div class="form-group">
+                <label for="noOfPeople">
+                  <i class="bi bi-people-fill"></i> Number of Travelers
+                </label>
+                <input type="number" id="noOfPeople" class="form-control" 
+                       [ngClass]="{'is-invalid': bookForm.controls['noofPeople'].invalid && bookForm.controls['noofPeople'].dirty}"
+                       formControlName="noofPeople" (change)="getCostAndCheckOutDate()" min="1" max="5">
+                <div class="invalid-feedback" *ngIf="bookForm.controls['noofPeople'].invalid && bookForm.controls['noofPeople'].dirty">
+                  Please enter a valid number (1-5 travelers allowed)
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="checkIn">
+                  <i class="bi bi-calendar-check"></i> Trip Start Date
+                </label>
+                <input type="date" id="checkIn" class="form-control"
+                       [ngClass]="{'is-invalid': bookForm.controls['checkIn'].invalid && bookForm.controls['checkIn'].touched || bookingPresent}"
+                       [min]="today" formControlName="checkIn" (change)="handleDateChange()">
+                <div class="invalid-feedback" *ngIf="bookForm.controls['checkIn'].invalid && bookForm.controls['checkIn'].touched">
+                  Please select a valid date (must be today or later)
+                </div>
+                <div class="invalid-feedback" *ngIf="bookingPresent">
+                  You already have a booking for this date. Please choose another date.
+                </div>
+              </div>
+              
+              <div class="form-group flight-option">
+                <label>
+                  <i class="bi bi-airplane"></i> Include Flight?
+                </label>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="flightToggle" formControlName="flight" 
+                         (change)="getCostAndCheckOutDate()">
+                  <label for="flightToggle" class="toggle-label">
+                    <span class="toggle-inner"></span>
+                    <span class="toggle-switch"></span>
+                  </label>
+                  <span class="toggle-status">{{ bookForm.value.flight ? 'YES' : 'NO' }}</span>
+                </div>
+              </div>
+
+              <div class="cost-summary" *ngIf="totalCharges > 0">
+                <div class="summary-header">
+                  <h3>Trip Summary</h3>
+                </div>
+                
+                <div class="summary-item">
+                  <span>Base price ({{ bookForm.value.noofPeople }} travelers)</span>
+                  <span>{{ costPerPerson * bookForm.value.noofPeople | currency:'USD' }}</span>
+                </div>
+                
+                <div class="summary-item" *ngIf="bookForm.value.flight">
+                  <span>Flight charges</span>
+                  <span class="text-primary">+ {{ flightCharge | currency:'USD' }}</span>
+                </div>
+                
+                <div class="summary-item" *ngIf="discount > 0">
+                  <span>Discount</span>
+                  <span class="text-success">- {{ discount | currency:'USD' }}</span>
+                </div>
+                
+                <div class="summary-item trip-dates" *ngIf="checkOutDate">
+                  <span>Trip duration</span>
+                  <span>{{ bookForm.value.checkIn | date:'MMM d' }} - {{ checkOutDate | date:'MMM d, yyyy' }}</span>
+                </div>
+                
+                <div class="summary-total">
+                  <span>Total Price</span>
+                  <span>{{ totalCharges | currency:'USD' }}</span>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-book" [disabled]="bookForm.invalid || bookForm.pristine">
+                  <i class="bi bi-check-circle"></i> Confirm Booking
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-back" [routerLink]="['/packages']">
+                  <i class="bi bi-arrow-left"></i> Back to Packages
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal custom-modal" tabindex="-1" role="dialog" [ngClass]="{'show': successMessage}">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Booking Confirmed!</h4>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="success-icon">
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+          
+          <h3>Congratulations!</h3>
+          <p class="destination-name">{{ destination?.destinationName }}</p>
+          
+          <div class="booking-details">
+            <div class="detail-item">
+              <i class="bi bi-calendar-event"></i>
+              <span>Starts: {{ bookForm.value.checkIn | date:'MMMM d, yyyy' }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="bi bi-calendar-check"></i>
+              <span>Ends: {{ checkOutDate | date:'MMMM d, yyyy' }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="bi bi-people"></i>
+              <span>{{ bookForm.value.noofPeople }} {{ bookForm.value.noofPeople === 1 ? 'Traveler' : 'Travelers' }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="bi bi-cash"></i>
+              <span>Total: {{ totalCharges | currency:'USD' }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button class="btn btn-primary" (click)="closeModal()">
+            <i class="bi bi-journal-check"></i> View My Bookings
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop"></div>
+  </div>
+</section>

@@ -1,0 +1,102 @@
+ <div class="bookings-container">
+    <div class="bookings-header">
+      <h2 class="bookings-title">My Transactions</h2>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2 text-muted">Loading your transactions...</p>
+    </div>
+
+    <div class="booking-list" *ngIf="!loading">
+      <div class="booking-card" *ngFor="let booking of data">
+        <div class="booking-card-header">
+          <div class="booking-id">
+            <i class="pi pi-tag"></i> 
+            <span>Order #{{booking.bookingId}}</span>
+          </div>
+        </div>
+        
+        <div class="booking-card-body">
+          <div class="booking-details">
+            <div class="detail-row">
+              <label>Destination</label>
+              <span class="destination-name">{{booking.destination.destinationName}}</span>
+            </div>
+            
+            <div class="detail-row">
+              <label>Check-Out On</label>
+              <span>{{booking.checkOut | date:'MMM dd, yyyy'}}</span>
+            </div>
+            
+            <div class="detail-row">
+              <label>Total Cost</label>
+              <span class="cost">${{booking.totalCost}}</span>
+            </div>
+          </div>
+          
+          <div class="booking-actions">
+            <button class="cancel-button" (click)="confirmCancellation(booking)">
+              <i class="pi pi-times-circle"></i> Cancel Booking
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="data.length === 0" class="empty-state">
+        <i class="pi pi-calendar-times empty-icon"></i>
+        <p>You don't have any bookings yet</p>
+      </div>
+    </div>
+
+    <p-dialog 
+      header="Confirm Cancellation" 
+      [(visible)]="cancelConfirmation"
+      [modal]="true" 
+      [style]="{width: '450px'}" 
+      [baseZIndex]="1000" 
+      [closable]="true"
+      [draggable]="false"
+      styleClass="solid-dialog">
+      
+      <div class="cancellation-dialog">
+        <div class="warning-icon">
+          <i class="pi pi-exclamation-circle"></i>
+        </div>
+        
+        <h3 class="warning-title">Are you sure you want to cancel your trip?</h3>
+        
+        <div class="trip-details">
+          <div class="trip-detail">
+            <span>Trip start Date:</span>
+            <strong>{{cancellationDetails.checkIn | date:'longDate'}}</strong>
+          </div>
+          
+          <div class="trip-detail">
+            <span>Trip end date:</span>
+            <strong>{{cancellationDetails.checkOut | date:'longDate'}}</strong>
+          </div>
+          
+          <div class="trip-detail refund">
+            <span>Refund Amount:</span>
+            <strong>{{cancellationDetails.totalCost | currency}}</strong>
+          </div>
+        </div>
+      </div>
+      
+      <ng-template pTemplate="footer">
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" (click)="cancelConfirmation=false;">
+            <i class="pi pi-arrow-left"></i> Back
+          </button>
+          <button class="btn btn-danger" (click)="cancelBooking(cancellationDetails.bookingId)">
+            <i class="pi pi-check"></i> Confirm Cancellation
+          </button>
+        </div>
+      </ng-template>
+    </p-dialog>
+    <p-toast position="top-center" [style]="{marginTop: '80px'}"></p-toast>
+  </div>
+  

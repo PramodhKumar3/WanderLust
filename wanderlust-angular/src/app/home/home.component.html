@@ -1,0 +1,49 @@
+<div class="hero">
+  <div class="overlay"></div>
+  
+  <div class="hero-content">
+    <div class="logo-container">
+      <img src="./assets/lono-final.png" alt="Wanderlust Logo" class="logo">
+    </div>
+    
+    <h1 class="main-title">WANDERLUST</h1>
+    <p class="tagline">Discover the world's most amazing places</p>
+    
+    <div class="search-container">
+      <div class="search-box">
+        <i class="search-icon bi bi-search"></i>
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Where would you like to go?" 
+          [(ngModel)]="searchTerm" 
+          (keyup.enter)="searchPackages()" 
+          name="search"
+        >
+        <button class="search-button" (click)="searchPackages()">
+          Explore
+        </button>
+      </div>
+      <p class="search-hint">Try "Europe", "Asia", "Australia" or "Paris"</p>
+    </div>
+  </div>
+  
+  <div class="destination-categories">
+    <div class="category" (click)="navigateToCategory('Australia')">
+      <div class="category-image asia"></div>
+      <span>Australia</span>
+    </div>
+    <div class="category" (click)="navigateToCategory('europe')">
+      <div class="category-image europe"></div>
+      <span>Europe</span>
+    </div>
+    <div class="category" (click)="navigateToCategory('Asia')">
+      <div class="category-image americas"></div>
+      <span>Asia</span>
+    </div>
+    <div class="category" (click)="navigateToCategory('Thailand')">
+      <div class="category-image africa"></div>
+      <span>Thailand</span>
+    </div>
+  </div>
+</div>

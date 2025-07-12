@@ -41,8 +41,13 @@ The aim of WanderLust is to assist users in choosing, customizing, and booking t
 
 ## 🖼️ Screenshots
 
-![Wanderlust Home Page](<Screenshot%20(185).png>)
-![Wanderlust Logged In](<Screenshot%20(186).png>)
+### Wanderlust Home Page
+
+![Wanderlust Home Page](images/HomePage.png)
+
+### Wanderlust Swagger UI
+
+![Wanderlust SwaggerUI](images/SwaggerUI.png)
 
 ---
 

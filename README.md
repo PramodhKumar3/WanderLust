@@ -238,7 +238,7 @@ The aim of WanderLust is to assist users in choosing, customizing, and booking t
 ## ▶️ Running the Application
 
 **Backend:** Run via STS → Run as Spring Boot App.  
-Access Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+Access Swagger UI: [http://localhost:4000/wanderlust/swagger-ui.html](http://localhost:4000/wanderlust/swagger-ui.html)
 
 **Frontend:** Run `ng serve --open` and open `http://localhost:4200`.
 

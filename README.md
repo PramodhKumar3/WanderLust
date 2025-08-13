@@ -374,4 +374,10 @@ This project is licensed under the MIT License.
 
 GitHub Repository: [https://github.com/PramodhKumar3/WanderLust](https://github.com/PramodhKumar3/WanderLust)
 
+---
+
+## 📬 Contact
+
+Created with 💻 by [Pramodh Kumar](https://www.linkedin.com/in/tamminaina-pramodh-kumar-6433a4242)
+
 [🔼 Back to top](#wanderlust-)

@@ -202,36 +202,50 @@ The aim of WanderLust is to assist users in choosing, customizing, and booking t
 
 ### 🗃️ Database - MySQL Setup
 
-1. Install and start MySQL Server on your machine. You can use tools like XAMPP, WAMP, or MySQL Workbench.
+1.  Install and start MySQL Server on your machine. You can use tools like XAMPP, WAMP, or MySQL Workbench.
 
-2. Create the database in MySQL using terminal or a GUI:
+2.  Create the database in MySQL using terminal or a GUI:
 
-   ```sql
-   CREATE DATABASE wanderlust;
-   ```
+    ```sql
+    CREATE DATABASE wanderlust;
+    ```
 
-3. Open `tablescripts.sql` file available in the project.
+3.  Based on the entities in your project, design and create the necessary tables using CREATE TABLE statements.
 
-4. Run all the SQL commands in `tablescripts.sql` in your MySQL database to create the necessary tables and insert seed data:
+    - Define columns, data types, and constraints according to your project requirements.
+    - Example:
 
-   - Using MySQL CLI:
-     ```bash
-     mysql -u root -p wanderlust < path/to/tablescripts.sql
-     ```
-   - Or paste and execute inside MySQL Workbench.
+    ```bash
+    CREATE TABLE users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL
+    );
+    ```
 
-5. Alternatively, if you're unable to run `.sql` file through CLI, you can:
-   - Open your terminal or command prompt.
-   - Log in to MySQL:
-     ```bash
-     mysql -u root -p
-     ```
-   - Use the database:
-     ```sql
-     USE wanderlust;
-     ```
-   - Open the `tablescripts.sql` file in any editor, **copy the SQL commands**, and paste them **directly into the MySQL prompt** or **Workbench query window**.
-   - Press `Enter` or click **Execute** to run and populate the data manually.
+4.  Insert your required values into the tables using INSERT INTO statements.
+
+    - Example:
+
+    ```bash
+    INSERT INTO users (name, email, password)
+    VALUES ('John Doe', 'john@example.com', 'hashedpassword123');
+    ```
+
+5.  You can run these SQL commands:
+
+    - Using MySQL CLI:
+
+    ```bash
+    mysql -u root -p wanderlust
+    ```
+
+    - Then paste your CREATE TABLE and INSERT commands directly.
+    - Using MySQL Workbench:
+      - Open a new SQL query tab.
+      - Paste your commands.
+      - Click Execute to create tables and insert data.
 
 ---
 

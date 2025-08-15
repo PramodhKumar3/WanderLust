@@ -238,7 +238,8 @@ The aim of WanderLust is to assist users in choosing, customizing, and booking t
     - Using MySQL CLI:
 
     ```bash
-    mysql -u root -p wanderlust
+    mysql -u root -p
+    Enter you password: your_password
     ```
 
     - Then paste your CREATE TABLE and INSERT commands directly.

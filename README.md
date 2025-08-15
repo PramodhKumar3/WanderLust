@@ -14,6 +14,9 @@
 7. [Log4j2 Setup](#log4j2-setup)
 8. [Contributing](#contributing)
 9. [Author](#author)
+10. [Configuration](#-configuration-example)
+11. [License](#-license)
+12. [Contact](#-contact)
 
 ---
 
@@ -364,30 +367,6 @@ server.port=8080
 ## 📄 License
 
 This project is licensed under the MIT License.
-
----
-
-## 📁 .gitignore
-
-```
-/target/
-/node_modules/
-/.env
-*.log
-*.class
-*.jar
-*.war
-.DS_Store
-.idea/
-*.iml
-.vscode/
-```
-
----
-
-## 🔗 Project Link
-
-GitHub Repository: [https://github.com/PramodhKumar3/WanderLust](https://github.com/PramodhKumar3/WanderLust)
 
 ---
 
